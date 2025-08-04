@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BISRI KARIM - Ingénieur DevOps</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Consolas', 'Courier Prime', monospace;
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .terminal-container {
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin: 20px auto;
+            max-width: 1200px;
+            border: 1px solid #333;
+        }
+
+        .terminal-header {
+            background: #333;
+            padding: 10px 15px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .btn-close { background: #ff5f56; }
+        .btn-minimize { background: #ffbd2e; }
+        .btn-maximize { background: #27ca3f; }
+
+        .terminal-title {
+            margin-left: 15px;
+            color: #8e8e93;
+            font-size: 14px;
+        }
+
+        .terminal-body {
+            padding: 30px;
+            background: #1e1e1e;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .prompt {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .command {
+            color: #60a5fa;
+        }
+
+        .output {
+            color: #f0f0f0;
+        }
+
+        .section-title {
+            color: #4ade80;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 30px 0 15px 0;
+            border-bottom: 2px solid #4ade80;
+            padding-bottom: 5px;
+        }
+
+        .typing-animation {
+            border-right: 2px solid #4ade80;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: #4ade80; }
+            51%, 100% { border-color: transparent; }
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #374151, #4b5563);
+            color: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin: 3px;
+            display: inline-block;
+            font-size: 0.9rem;
+            border: 1px solid #6b7280;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: linear-gradient(45deg, #4ade80, #22c55e);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 222, 128, 0.3);
+        }
+
+        .experience-item {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #4ade80;
+            transition: all 0.3s ease;
+			border: 1px solid #60a5fa;
+			
+			
+			
+        }
+		.experience-item:nth-child(2) {
+    
+}
+
+        .experience-item:hover {
+            background: #333;
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(74, 222, 128, 0.1);
+        }
+
+        .company-name {
+            color: #60a5fa;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .job-title {
+            color: #fbbf24;
+            font-weight: bold;
+        }
+
+        .date {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        .contact-info {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .contact-item {
+            margin: 10px 0;
+            color: #f0f0f0;
+        }
+
+        .contact-icon {
+            color: #4ade80;
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        .formation-item {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 3px solid #60a5fa;
+        }
+
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .interest-item {
+            background: linear-gradient(45deg, #7c3aed, #a855f7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .btn-download {
+            background: linear-gradient(45deg, #4ade80, #22c55e);
+            color: #000;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Consolas', 'Courier Prime', monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 2px solid #4ade80;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(74, 222, 128, 0.3);
+        }
+
+        .btn-download:hover {
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(74, 222, 128, 0.5);
+            border-color: #22c55e;
+        }
+
+        .btn-download i {
+            margin-right: 8px;
+        }
+
+        .project-highlight {
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #60a5fa;
+        }
+
+        .project-title {
+            color: #fbbf24;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li:before {
+            content: "▶ ";
+            color: #4ade80;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .terminal-container {
+                margin: 10px;
+            }
+            
+            .terminal-body {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            .interest-item {
+                min-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-button btn-close"></div>
+                <div class="terminal-button btn-minimize"></div>
+                <div class="terminal-button btn-maximize"></div>
+                <div class="terminal-title">karim@RBPKBISRI1: ~</div>
+            </div>
+            
+            <div class="terminal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="prompt">karim@RBPKBISRI1:~$</div>
+                        <span class="command typing-line" data-text="cat ~/cv/bisri_karim.txt"></span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-lg-8">
+                        <!-- Header Section -->
+                        <div class="fade-in">
+                            <div class="section-title typing-line" data-text="# BISRI KARIM" data-delay="1000"></div>
+                            <div class="job-title typing-line h4" data-text="INGÉNIEUR DEVOPS" data-delay="2000"></div>
+                        </div>
+
+                        <!-- Expériences -->
+                        <div class="fade-in">
+                            <div class="section-title typing-line" data-text="## EXPÉRIENCES PROFESSIONNELLES" data-delay="3000"></div>
+                            
+                            <div class="experience-item">
+                                <div class="company-name">Sofrecom Services Maroc</div>
+                                <div class="job-title">Ingénieur DEVOPS</div>
+                                <div class="date">Janvier 2024 – Présent</div>
+                                <div class="project-highlight mt-3">
+                                    <div class="project-title">Framework : Agile Scrum</div>
+                                    <p><strong>Mission :</strong> Chargé de création, gestion et maintenances des instances Ansible AWX-on-demande pour les équipes de développement ansible au sein de l'équipe « Ansible for Infrastructure Automation »</p>
+                                    
+                                    <div class="mb-3">
+                                        <strong>Technologies :</strong>
+                                        <div class="mt-2">
+                                            <div class="skill-tag">Kubespray</div>
+                                            <div class="skill-tag">Kubernetes</div>
+                                            <div class="skill-tag">Docker</div>
+                                            <div class="skill-tag">Ansible</div>
+                                            <div class="skill-tag">Terraform</div>
+                                            <div class="skill-tag">FluxCD</div>
+                                            <div class="skill-tag">Traefik</div>
+                                            <div class="skill-tag">Keycloak</div>
+                                            <div class="skill-tag">ELK (filebeat)</div>
+                                            <div class="skill-tag">Vault</div>
+                                            <div class="skill-tag">kube-Prometheus-stack</div>
+                                            <div class="skill-tag">Gitlab CI/CD</div>
+                                            <div class="skill-tag">GitLeaks</div>
+                                            <div class="skill-tag">SonarQube</div>
+                                            <div class="skill-tag">Renovate</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <ul>
+                                        <li>Mise en place de scripts Python/Shell pour l'automatisation de la création d'inventaires dynamiques dans AWX</li>
+                                        <li>Développement des playbooks ansible pour la gestion des équipements réseaux</li>
+                                        <li>Upgrade de la version de Ansible AWX operator 2.7.6 → 2.19.4</li>
+                                        <li>Upgrade de cluster Kubernetes via le rôle Ansible: kubespray</li>
+                                        <li>Etude : Teste volumineux de Charge entre AWX et VAULT (exemple : récupération des clés depuis VAULT via ansible lookup plug-in)</li>
+                                        <li>Prise en compte des demandes des utilisateurs (création des instances, déblocages, ...)</li>
+                                        <li>Automatiser le test des flux ssh depuis le cluster k8s vers les cibles</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="experience-item">
+                                <div class="company-name">Intelcia IT Solution</div>
+                                <div class="job-title">Ingénieur de production DEVOPS (Freelance)</div>
+                                <div class="date">Janvier 2023 – Décembre 2023</div>
+                                <ul class="mt-3">
+                                    <li>Intégration et mise en place des nouvelles demandes de support des différents composants applicatifs (job jenkins, pods et composants K8S, base de données, file systèmes, processus et services, espaces disques, …)</li>
+                                    <li>Maintenir et évoluer la supervision existante</li>
+                                    <li>Utilisation des outils tels que Jenkins et Grafana pour améliorer les processus de surveillance et automatiser des traitements applicatifs</li>
+                                    <li>Collecter, suivre et analyser les métriques liées aux performances, à la disponibilité et à l'état des applications et des ressources déployées dans le cluster K8S</li>
+                                    <li>Utilisation de Visual TOM afin de piloter de nombreux logiciels et systèmes pour planifier, orchestrer et synchroniser l'exécution des différentes taches métiers</li>
+                                    <li>Utilisation d'Apache Airflow pour orchestrer, planifier et surveiller les workflows complexes</li>
+                                    <li>Utilisation de confluence afin de partager de la documentation et les wikis entres les membres des équipes</li>
+                                </ul>
+                            </div>
+
+                            <div class="experience-item">
+                                <div class="company-name">Sofrecom Services Maroc</div>
+                                <div class="job-title">Ingénieur de production DEVOPS</div>
+                                <div class="date">Mars 2019 – Décembre 2022</div>
+                                
+                                <div class="project-highlight mt-3">
+                                    <div class="project-title">Premier projet : Migration DollarU => One Automation</div>
+                                    <p>Rattaché au Centre de Compétence d'Intégration et d'Exploitabilité d'ORANGE FRANCE</p>
+                                    <ul>
+                                        <li>Assurer la coordination entre les membres de chaque projet de migration en respectant le processus de migration</li>
+                                        <li>Soutien de la mise en œuvre du nouvel ordonnancement au niveau de l'environnement de production</li>
+                                        <li>Formation de la MOE et des exploitants sur les bases d'One Automation</li>
+                                        <li>Réalisation du paramétrage du nouvel ordonnancement selon le besoin de chaque projet</li>
+                                        <li>Mise en place des composants de supervision au niveau de PATROL après avoir élaboré le cahier des charges</li>
+                                        <li>Tests unitaires des tâches réalisées au niveau de l'ordonnancement et de la supervision</li>
+                                        <li>Rédaction et création des fiches d'exploitation, du cahier d'installation et du cahier de supervision</li>
+                                        <li>Packaging du coli avec tous les éléments nécessaires pour assurer une livraison sur mesure</li>
+                                        <li>Veiller à ce que la qualité des livraisons soit équivaut aux préconisations d'Orange</li>
+                                    </ul>
+                                </div>
+
+                                <div class="project-highlight">
+                                    <div class="project-title">Deuxième projet : Ingénieur de production DevOps - Orange France</div>
+                                    <p>Portefeuille Applicatif de catégorie Gold. Projet en Agilité au sein d'une équipe en mode SCRUM.</p>
+                                    <ul>
+                                        <li>Créer ou Amélioration des pipelines de déploiement déjà existants avec les nouvelles technologies Ansible/Docker SWARM/GitLab</li>
+                                        <li>Gestion de notre infrastructure applicatifs hybride via gitlab + terraform + GCP + Ansible</li>
+                                        <li>Migration des pipeline depuis Jenkins et scripts shell vers GitLab CI/CD</li>
+                                        <li>Transformation d'architecture applicatif en micro-services</li>
+                                        <li>Gestion des incidents et changements OPÉRATIONNELS</li>
+                                    </ul>
+                                    <div class="mt-2">
+                                        <strong>Compétences :</strong> Méthodes agiles · DevOps · Docker · Terraform · Ansible · Oracle Database · GitLab · One automation · Red Hat Linux
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="experience-item">
+                                <div class="company-name">Capgemini</div>
+                                <div class="job-title">Ingénieur de production</div>
+                                <div class="date">Août 2018 – Février 2019</div>
+                                <ul class="mt-3">
+                                    <li>Analyse fonctionnelle et technique des besoins et exigences clients</li>
+                                    <li>Assurer le bon fonctionnement et l'intégrité des services informatiques du client et garantir la haute disponibilité des applications</li>
+                                    <li>Suivre et assurer le bon déroulement du plan de production</li>
+                                    <li>Résolution des incidents conformément aux termes du SLA</li>
+                                    <li>Capacité à proposer des solutions adéquates pour éviter les incidents les plus récurrents</li>
+                                    <li>Gestion de l'exécution des jobs au niveau du planificateur CA Autosys</li>
+                                    <li>Automatisation des tâches récurrentes/manuelles via des scripts et des jobs industrialisés</li>
+                                </ul>
+                                <div class="mt-3">
+                                    <strong>Environnement :</strong> Autosys CA Workload, WorldView, BMC, Sysload, Netbackup, Avamar, Virtualisation, CFT, SQL Server, Perl, SQL et T-SQL
+                                </div>
+                            </div>
+
+                            <div class="experience-item">
+                                <div class="company-name">Docapost BPO</div>
+                                <div class="job-title">Analyste d'exploitation</div>
+                                <div class="date">Juin 2012 – Juillet 2018</div>
+                                <ul class="mt-3">
+                                    <li>Établir un diagnostic initial des alertes/incidents</li>
+                                    <li>Mise en place des consignes de référence niveau 1 et 2 pour l'application de pilotage</li>
+                                    <li>Pilotage du service de surveillance niveau 0 et 1</li>
+                                    <li>Gestion des appels clients entrants, traçabilité et escalade hiérarchique</li>
+                                    <li>Fournir un support de niveau 2</li>
+                                    <li>Administration des systèmes et services Windows</li>
+                                    <li>Rédaction et mise à jour des documents techniques d'exploitation</li>
+                                </ul>
+                                <div class="mt-3">
+                                    <strong>Environnement :</strong> VNC, TSE, SSH, SM9 (HP), Zabbix, Nagios, Centreon, Script Shell, CFT, Gateway XFB, GPO, SQL Server, Crystal Report, Gnu-linux, Windows Server 2008/2012, Apache, Alfresco
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Compétences -->
+                        <div class="fade-in">
+                            <div class="section-title typing-line" data-text="## COMPÉTENCES TECHNIQUES" data-delay="4000"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-info">Systèmes d'exploitation</h6>
+                                    <div class="skill-tag">RedHat</div>
+                                    <div class="skill-tag">Unix</div>
+                                    <div class="skill-tag">Windows Server</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-info">Administration services</h6>
+                                    <div class="skill-tag">Apache</div>
+                                    <div class="skill-tag">Nginx</div>
+                                    <div class="skill-tag">Tomcat</div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <h6 class="text-info">Infrastructure as Code</h6>
+                                    <div class="skill-tag">Ansible</div>
+                                    <div class="skill-tag">Terraform</div>
+                                    <div class="skill-tag">Vagrant</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-info">Conteneurisation</h6>
+                                    <div class="skill-tag">Docker</div>
+                                    <div class="skill-tag">Docker Swarm</div>
+                                    <div class="skill-tag">Kubernetes</div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <h6 class="text-info">CI/CD</h6>
+                                    <div class="skill-tag">Jenkins</div>
+                                    <div class="skill-tag">GitLab CI</div>
+                                    <div class="skill-tag">Git</div>
+                                    <div class="skill-tag">SVN</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-info">Monitoring</h6>
+                                    <div class="skill-tag">ELK</div>
+                                    <div class="skill-tag">Prometheus</div>
+                                    <div class="skill-tag">Grafana</div>
+                                    <div class="skill-tag">Nagios</div>
+                                    <div class="skill-tag">Zabbix</div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <h6 class="text-info">Bases de données</h6>
+                                    <div class="skill-tag">Oracle</div>
+                                    <div class="skill-tag">MySQL</div>
+                                    <div class="skill-tag">PostgreSQL</div>
+                                    <div class="skill-tag">MongoDB</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-info">Programmation</h6>
+                                    <div class="skill-tag">Python</div>
+                                    <div class="skill-tag">Shell</div>
+                                    <div class="skill-tag">JavaScript</div>
+                                    <div class="skill-tag">C#.Net</div>
+                                    <div class="skill-tag">SQL</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <!-- Contact Info -->
+                        <div class="fade-in">
+                            <div class="section-title typing-line" data-text="## CONTACT" data-delay="2500"></div>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-phone contact-icon"></i>
+                                    +212 776 005 282
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope contact-icon"></i>
+                                    bisri.karim@gmail.com
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt contact-icon"></i>
+                                    Casablanca, Maroc
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Formation -->
+                        <div class="fade-in">
+                            <div class="section-title typing-line" data-text="## FORMATIONS" data-delay="5000"></div>
+                            <div class="formation-item">
+                                <div class="job-title">Master en informatique – Option MIAGE</div>
+                                <div class="date">2012 – 2016</div>
+                                <div>École Marocaine des sciences de l'ingénieur – EMSI</div>
+                                <div class="text-muted">Casablanca - Maroc</div>
+                            </div>
+                            <div class="formation-item">
+                                <div class="job-title">Technicien spécialisé en développement informatique</div>
+                                <div class="date">2010 – 2012</div>
+                                <div>Office de Formation Professionnelle et de la Promotion de Travail (OFPPT)</div>
+                                <div class="text-muted">Casablanca - Maroc</div>
+                            </div>
+                        </div>
+
+                        <!-- Centres d'intérêt -->
+                        <div class="fade-in">
+                            <div class="section-title typing-line" data-text="## CENTRES D'INTÉRÊT" data-delay="6000"></div>
+                            <div class="interests">
+                                <div class="interest-item">
+                                    <i class="fas fa-running"></i>
+                                    Course à pied, marche
+                                </div>
+                                <div class="interest-item">
+                                    <i class="fas fa-laptop-code"></i>
+                                    Nouvelles technologies
+                                </div>
+                                <div class="interest-item">
+                                    <i class="fas fa-microphone"></i>
+                                    Podcasting
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12 text-center mb-4">
+                        <a href="https://drive.google.com/file/d/1eOtFMOqWnSByvq_XCHSjM0orxen5qok6/view?usp=sharing" target="_blank" class="btn-download">
+                            <i class="fas fa-download"></i> ./download_cv.sh
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="prompt">karim@RBPKBISRI1:~$</div>
+                        <span class="typing-line" data-text="echo 'Merci de votre attention !' && exit" data-delay="7000"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Animation de frappe
+        function typeWriter(element, text, delay = 0) {
+            setTimeout(() => {
+                let i = 0;
+                element.innerHTML = '';
+                element.style.borderRight = '2px solid #4ade80';
+                
+                function type() {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(type, Math.random() * 100 + 50);
+                    } else {
+                        setTimeout(() => {
+                            element.style.borderRight = 'none';
+                        }, 500);
+                    }
+                }
+                type();
+            }, delay);
+        }
+
+        // Animation d'apparition au scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Initialisation des animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const typingElements = document.querySelectorAll('.typing-line');
+            
+            typingElements.forEach(element => {
+                const text = element.getAttribute('data-text');
+                const delay = parseInt(element.getAttribute('data-delay')) || 0;
+                typeWriter(element, text, delay);
+            });
+
+            // Animation au scroll
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Déclencher une fois au chargement
+            
+            // Animation d'apparition progressive
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in').forEach((element, index) => {
+                    setTimeout(() => {
+                        element.classList.add('visible');
+                    }, index * 200);
+                });
+            }, 8000);
+        });
+
+        // Effet de hover sur les compétences
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                tag.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+                
+                tag.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+
+        // Animation du curseur clignotant
+        setInterval(() => {
+            const cursors = document.querySelectorAll('.typing-animation');
+            cursors.forEach(cursor => {
+                cursor.style.borderColor = cursor.style.borderColor === 'transparent' ? '#4ade80' : 'transparent';
+            });
+        }, 500);
+    </script>
+</body>
+</html>
