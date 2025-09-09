@@ -95,6 +95,20 @@
             51%, 100% { border-color: transparent; }
         }
 
+        /* Styles pour l'interaction ENTRÉE */
+        .cv-content {
+            display: none;
+        }
+
+        .cv-content.show {
+            display: block;
+        }
+
+        .cursor {
+            border-right: 2px solid #4ade80;
+            animation: blink 1s infinite;
+        }
+
         .skill-tag {
             background: linear-gradient(45deg, #374151, #4b5563);
             color: #f0f0f0;
@@ -293,289 +307,295 @@
                     <div class="col-12">
                         <div class="prompt">karim@RBPKBISRI1:~$</div>
                         <span class="command typing-line" data-text="cat ~/cv/bisri_karim.txt"></span>
+                        <span class="cursor" id="waitingCursor" style="display: none;"></span>
+                        <div class="mt-2" id="pressEnterText" style="display: none; color: #9ca3af; font-style: italic;">
+                            Appuyez sur ENTRÉE pour exécuter la commande...
+                        </div>
                     </div>
                 </div>
 
-                <div class="row mt-4">
-                    <div class="col-lg-8">
-                        <!-- Header Section -->
-                        <div class="fade-in">
-                            <div class="section-title typing-line" data-text="# BISRI KARIM" data-delay="1000"></div>
-                            <div class="job-title typing-line h4" data-text="INGÉNIEUR DEVOPS" data-delay="2000"></div>
-                        </div>
+                <div class="cv-content" id="cvContent">
+                    <div class="row mt-4">
+                        <div class="col-lg-8">
+                            <!-- Header Section -->
+                            <div class="fade-in">
+                                <div class="section-title typing-line" data-text="# BISRI KARIM" data-delay="1000"></div>
+                                <div class="job-title typing-line h4" data-text="INGÉNIEUR DEVOPS" data-delay="2000"></div>
+                            </div>
 
-                        <!-- Expériences -->
-                        <div class="fade-in">
-                            <div class="section-title typing-line" data-text="## EXPÉRIENCES PROFESSIONNELLES" data-delay="3000"></div>
-                            
-                            <div class="experience-item">
-                                <div class="company-name">Sofrecom Services Maroc</div>
-                                <div class="job-title">Ingénieur DEVOPS</div>
-                                <div class="date">Janvier 2024 – Présent</div>
-                                <div class="project-highlight mt-3">
-                                    <div class="project-title">Framework : Agile Scrum</div>
-                                    <p><strong>Mission :</strong> Chargé de création, gestion et maintenances des instances Ansible AWX-on-demande pour les équipes de développement ansible au sein de l'équipe « Ansible for Infrastructure Automation »</p>
+                            <!-- Expériences -->
+                            <div class="fade-in">
+                                <div class="section-title typing-line" data-text="## EXPÉRIENCES PROFESSIONNELLES" data-delay="3000"></div>
+                                
+                                <div class="experience-item">
+                                    <div class="company-name">Sofrecom Services Maroc</div>
+                                    <div class="job-title">Ingénieur DEVOPS</div>
+                                    <div class="date">Janvier 2024 – Présent</div>
+                                    <div class="project-highlight mt-3">
+                                        <div class="project-title">Framework : Agile Scrum</div>
+                                        <p><strong>Mission :</strong> Chargé de création, gestion et maintenances des instances Ansible AWX-on-demande pour les équipes de développement ansible au sein de l'équipe « Ansible for Infrastructure Automation »</p>
+                                        
+                                        <div class="mb-3">
+                                            <strong>Technologies :</strong>
+                                            <div class="mt-2">
+                                                <div class="skill-tag">Kubespray</div>
+                                                <div class="skill-tag">Kubernetes</div>
+                                                <div class="skill-tag">Docker</div>
+                                                <div class="skill-tag">Ansible</div>
+                                                <div class="skill-tag">Terraform</div>
+                                                <div class="skill-tag">FluxCD</div>
+                                                <div class="skill-tag">Traefik</div>
+                                                <div class="skill-tag">Keycloak</div>
+                                                <div class="skill-tag">ELK (filebeat)</div>
+                                                <div class="skill-tag">Vault</div>
+                                                <div class="skill-tag">kube-Prometheus-stack</div>
+                                                <div class="skill-tag">Gitlab CI/CD</div>
+                                                <div class="skill-tag">GitLeaks</div>
+                                                <div class="skill-tag">SonarQube</div>
+                                                <div class="skill-tag">Renovate</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <ul>
+                                            <li>Mise en place de scripts Python/Shell pour l'automatisation de la création d'inventaires dynamiques dans AWX</li>
+                                            <li>Développement des playbooks ansible pour la gestion des équipements réseaux</li>
+                                            <li>Upgrade de la version de Ansible AWX operator 2.7.6 → 2.19.4</li>
+                                            <li>Upgrade de cluster Kubernetes via le rôle Ansible: kubespray</li>
+                                            <li>Etude : Teste volumineux de Charge entre AWX et VAULT (exemple : récupération des clés depuis VAULT via ansible lookup plug-in)</li>
+                                            <li>Prise en compte des demandes des utilisateurs (création des instances, déblocages, ...)</li>
+                                            <li>Automatiser le test des flux ssh depuis le cluster k8s vers les cibles</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="experience-item">
+                                    <div class="company-name">Intelcia IT Solution</div>
+                                    <div class="job-title">Ingénieur de production DEVOPS (Freelance)</div>
+                                    <div class="date">Janvier 2023 – Décembre 2023</div>
+                                    <ul class="mt-3">
+                                        <li>Intégration et mise en place des nouvelles demandes de support des différents composants applicatifs (job jenkins, pods et composants K8S, base de données, file systèmes, processus et services, espaces disques, …)</li>
+                                        <li>Maintenir et évoluer la supervision existante</li>
+                                        <li>Utilisation des outils tels que Jenkins et Grafana pour améliorer les processus de surveillance et automatiser des traitements applicatifs</li>
+                                        <li>Collecter, suivre et analyser les métriques liées aux performances, à la disponibilité et à l'état des applications et des ressources déployées dans le cluster K8S</li>
+                                        <li>Utilisation de Visual TOM afin de piloter de nombreux logiciels et systèmes pour planifier, orchestrer et synchroniser l'exécution des différentes taches métiers</li>
+                                        <li>Utilisation d'Apache Airflow pour orchestrer, planifier et surveiller les workflows complexes</li>
+                                        <li>Utilisation de confluence afin de partager de la documentation et les wikis entres les membres des équipes</li>
+                                    </ul>
+                                </div>
+
+                                <div class="experience-item">
+                                    <div class="company-name">Sofrecom Services Maroc</div>
+                                    <div class="job-title">Ingénieur de production DEVOPS</div>
+                                    <div class="date">Mars 2019 – Décembre 2022</div>
                                     
-                                    <div class="mb-3">
-                                        <strong>Technologies :</strong>
+                                    <div class="project-highlight mt-3">
+                                        <div class="project-title">Premier projet : Migration DollarU => One Automation</div>
+                                        <p>Rattaché au Centre de Compétence d'Intégration et d'Exploitabilité d'ORANGE FRANCE</p>
+                                        <ul>
+                                            <li>Assurer la coordination entre les membres de chaque projet de migration en respectant le processus de migration</li>
+                                            <li>Soutien de la mise en œuvre du nouvel ordonnancement au niveau de l'environnement de production</li>
+                                            <li>Formation de la MOE et des exploitants sur les bases d'One Automation</li>
+                                            <li>Réalisation du paramétrage du nouvel ordonnancement selon le besoin de chaque projet</li>
+                                            <li>Mise en place des composants de supervision au niveau de PATROL après avoir élaboré le cahier des charges</li>
+                                            <li>Tests unitaires des tâches réalisées au niveau de l'ordonnancement et de la supervision</li>
+                                            <li>Rédaction et création des fiches d'exploitation, du cahier d'installation et du cahier de supervision</li>
+                                            <li>Packaging du coli avec tous les éléments nécessaires pour assurer une livraison sur mesure</li>
+                                            <li>Veiller à ce que la qualité des livraisons soit équivaut aux préconisations d'Orange</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="project-highlight">
+                                        <div class="project-title">Deuxième projet : Ingénieur de production DevOps - Orange France</div>
+                                        <p>Portefeuille Applicatif de catégorie Gold. Projet en Agilité au sein d'une équipe en mode SCRUM.</p>
+                                        <ul>
+                                            <li>Créer ou Amélioration des pipelines de déploiement déjà existants avec les nouvelles technologies Ansible/Docker SWARM/GitLab</li>
+                                            <li>Gestion de notre infrastructure applicatifs hybride via gitlab + terraform + GCP + Ansible</li>
+                                            <li>Migration des pipeline depuis Jenkins et scripts shell vers GitLab CI/CD</li>
+                                            <li>Transformation d'architecture applicatif en micro-services</li>
+                                            <li>Gestion des incidents et changements OPÉRATIONNELS</li>
+                                        </ul>
                                         <div class="mt-2">
-                                            <div class="skill-tag">Kubespray</div>
-                                            <div class="skill-tag">Kubernetes</div>
-                                            <div class="skill-tag">Docker</div>
-                                            <div class="skill-tag">Ansible</div>
-                                            <div class="skill-tag">Terraform</div>
-                                            <div class="skill-tag">FluxCD</div>
-                                            <div class="skill-tag">Traefik</div>
-                                            <div class="skill-tag">Keycloak</div>
-                                            <div class="skill-tag">ELK (filebeat)</div>
-                                            <div class="skill-tag">Vault</div>
-                                            <div class="skill-tag">kube-Prometheus-stack</div>
-                                            <div class="skill-tag">Gitlab CI/CD</div>
-                                            <div class="skill-tag">GitLeaks</div>
-                                            <div class="skill-tag">SonarQube</div>
-                                            <div class="skill-tag">Renovate</div>
+                                            <strong>Compétences :</strong> Méthodes agiles · DevOps · Docker · Terraform · Ansible · Oracle Database · GitLab · One automation · Red Hat Linux
                                         </div>
                                     </div>
-                                    
-                                    <ul>
-                                        <li>Mise en place de scripts Python/Shell pour l'automatisation de la création d'inventaires dynamiques dans AWX</li>
-                                        <li>Développement des playbooks ansible pour la gestion des équipements réseaux</li>
-                                        <li>Upgrade de la version de Ansible AWX operator 2.7.6 → 2.19.4</li>
-                                        <li>Upgrade de cluster Kubernetes via le rôle Ansible: kubespray</li>
-                                        <li>Etude : Teste volumineux de Charge entre AWX et VAULT (exemple : récupération des clés depuis VAULT via ansible lookup plug-in)</li>
-                                        <li>Prise en compte des demandes des utilisateurs (création des instances, déblocages, ...)</li>
-                                        <li>Automatiser le test des flux ssh depuis le cluster k8s vers les cibles</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="experience-item">
-                                <div class="company-name">Intelcia IT Solution</div>
-                                <div class="job-title">Ingénieur de production DEVOPS (Freelance)</div>
-                                <div class="date">Janvier 2023 – Décembre 2023</div>
-                                <ul class="mt-3">
-                                    <li>Intégration et mise en place des nouvelles demandes de support des différents composants applicatifs (job jenkins, pods et composants K8S, base de données, file systèmes, processus et services, espaces disques, …)</li>
-                                    <li>Maintenir et évoluer la supervision existante</li>
-                                    <li>Utilisation des outils tels que Jenkins et Grafana pour améliorer les processus de surveillance et automatiser des traitements applicatifs</li>
-                                    <li>Collecter, suivre et analyser les métriques liées aux performances, à la disponibilité et à l'état des applications et des ressources déployées dans le cluster K8S</li>
-                                    <li>Utilisation de Visual TOM afin de piloter de nombreux logiciels et systèmes pour planifier, orchestrer et synchroniser l'exécution des différentes taches métiers</li>
-                                    <li>Utilisation d'Apache Airflow pour orchestrer, planifier et surveiller les workflows complexes</li>
-                                    <li>Utilisation de confluence afin de partager de la documentation et les wikis entres les membres des équipes</li>
-                                </ul>
-                            </div>
-
-                            <div class="experience-item">
-                                <div class="company-name">Sofrecom Services Maroc</div>
-                                <div class="job-title">Ingénieur de production DEVOPS</div>
-                                <div class="date">Mars 2019 – Décembre 2022</div>
-                                
-                                <div class="project-highlight mt-3">
-                                    <div class="project-title">Premier projet : Migration DollarU => One Automation</div>
-                                    <p>Rattaché au Centre de Compétence d'Intégration et d'Exploitabilité d'ORANGE FRANCE</p>
-                                    <ul>
-                                        <li>Assurer la coordination entre les membres de chaque projet de migration en respectant le processus de migration</li>
-                                        <li>Soutien de la mise en œuvre du nouvel ordonnancement au niveau de l'environnement de production</li>
-                                        <li>Formation de la MOE et des exploitants sur les bases d'One Automation</li>
-                                        <li>Réalisation du paramétrage du nouvel ordonnancement selon le besoin de chaque projet</li>
-                                        <li>Mise en place des composants de supervision au niveau de PATROL après avoir élaboré le cahier des charges</li>
-                                        <li>Tests unitaires des tâches réalisées au niveau de l'ordonnancement et de la supervision</li>
-                                        <li>Rédaction et création des fiches d'exploitation, du cahier d'installation et du cahier de supervision</li>
-                                        <li>Packaging du coli avec tous les éléments nécessaires pour assurer une livraison sur mesure</li>
-                                        <li>Veiller à ce que la qualité des livraisons soit équivaut aux préconisations d'Orange</li>
-                                    </ul>
                                 </div>
 
-                                <div class="project-highlight">
-                                    <div class="project-title">Deuxième projet : Ingénieur de production DevOps - Orange France</div>
-                                    <p>Portefeuille Applicatif de catégorie Gold. Projet en Agilité au sein d'une équipe en mode SCRUM.</p>
-                                    <ul>
-                                        <li>Créer ou Amélioration des pipelines de déploiement déjà existants avec les nouvelles technologies Ansible/Docker SWARM/GitLab</li>
-                                        <li>Gestion de notre infrastructure applicatifs hybride via gitlab + terraform + GCP + Ansible</li>
-                                        <li>Migration des pipeline depuis Jenkins et scripts shell vers GitLab CI/CD</li>
-                                        <li>Transformation d'architecture applicatif en micro-services</li>
-                                        <li>Gestion des incidents et changements OPÉRATIONNELS</li>
+                                <div class="experience-item">
+                                    <div class="company-name">Capgemini</div>
+                                    <div class="job-title">Ingénieur de production</div>
+                                    <div class="date">Août 2018 – Février 2019</div>
+                                    <ul class="mt-3">
+                                        <li>Analyse fonctionnelle et technique des besoins et exigences clients</li>
+                                        <li>Assurer le bon fonctionnement et l'intégrité des services informatiques du client et garantir la haute disponibilité des applications</li>
+                                        <li>Suivre et assurer le bon déroulement du plan de production</li>
+                                        <li>Résolution des incidents conformément aux termes du SLA</li>
+                                        <li>Capacité à proposer des solutions adéquates pour éviter les incidents les plus récurrents</li>
+                                        <li>Gestion de l'exécution des jobs au niveau du planificateur CA Autosys</li>
+                                        <li>Automatisation des tâches récurrentes/manuelles via des scripts et des jobs industrialisés</li>
                                     </ul>
-                                    <div class="mt-2">
-                                        <strong>Compétences :</strong> Méthodes agiles · DevOps · Docker · Terraform · Ansible · Oracle Database · GitLab · One automation · Red Hat Linux
+                                    <div class="mt-3">
+                                        <strong>Environnement :</strong> Autosys CA Workload, WorldView, BMC, Sysload, Netbackup, Avamar, Virtualisation, CFT, SQL Server, Perl, SQL et T-SQL
+                                    </div>
+                                </div>
+
+                                <div class="experience-item">
+                                    <div class="company-name">Docapost BPO</div>
+                                    <div class="job-title">Analyste d'exploitation</div>
+                                    <div class="date">Juin 2012 – Juillet 2018</div>
+                                    <ul class="mt-3">
+                                        <li>Établir un diagnostic initial des alertes/incidents</li>
+                                        <li>Mise en place des consignes de référence niveau 1 et 2 pour l'application de pilotage</li>
+                                        <li>Pilotage du service de surveillance niveau 0 et 1</li>
+                                        <li>Gestion des appels clients entrants, traçabilité et escalade hiérarchique</li>
+                                        <li>Fournir un support de niveau 2</li>
+                                        <li>Administration des systèmes et services Windows</li>
+                                        <li>Rédaction et mise à jour des documents techniques d'exploitation</li>
+                                    </ul>
+                                    <div class="mt-3">
+                                        <strong>Environnement :</strong> VNC, TSE, SSH, SM9 (HP), Zabbix, Nagios, Centreon, Script Shell, CFT, Gateway XFB, GPO, SQL Server, Crystal Report, Gnu-linux, Windows Server 2008/2012, Apache, Alfresco
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="experience-item">
-                                <div class="company-name">Capgemini</div>
-                                <div class="job-title">Ingénieur de production</div>
-                                <div class="date">Août 2018 – Février 2019</div>
-                                <ul class="mt-3">
-                                    <li>Analyse fonctionnelle et technique des besoins et exigences clients</li>
-                                    <li>Assurer le bon fonctionnement et l'intégrité des services informatiques du client et garantir la haute disponibilité des applications</li>
-                                    <li>Suivre et assurer le bon déroulement du plan de production</li>
-                                    <li>Résolution des incidents conformément aux termes du SLA</li>
-                                    <li>Capacité à proposer des solutions adéquates pour éviter les incidents les plus récurrents</li>
-                                    <li>Gestion de l'exécution des jobs au niveau du planificateur CA Autosys</li>
-                                    <li>Automatisation des tâches récurrentes/manuelles via des scripts et des jobs industrialisés</li>
-                                </ul>
-                                <div class="mt-3">
-                                    <strong>Environnement :</strong> Autosys CA Workload, WorldView, BMC, Sysload, Netbackup, Avamar, Virtualisation, CFT, SQL Server, Perl, SQL et T-SQL
+                            <!-- Compétences -->
+                            <div class="fade-in">
+                                <div class="section-title typing-line" data-text="## COMPÉTENCES TECHNIQUES" data-delay="4000"></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6 class="text-info">Systèmes d'exploitation</h6>
+                                        <div class="skill-tag">RedHat</div>
+                                        <div class="skill-tag">Unix</div>
+                                        <div class="skill-tag">Windows Server</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="text-info">Administration services</h6>
+                                        <div class="skill-tag">Apache</div>
+                                        <div class="skill-tag">Nginx</div>
+                                        <div class="skill-tag">Tomcat</div>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="experience-item">
-                                <div class="company-name">Docapost BPO</div>
-                                <div class="job-title">Analyste d'exploitation</div>
-                                <div class="date">Juin 2012 – Juillet 2018</div>
-                                <ul class="mt-3">
-                                    <li>Établir un diagnostic initial des alertes/incidents</li>
-                                    <li>Mise en place des consignes de référence niveau 1 et 2 pour l'application de pilotage</li>
-                                    <li>Pilotage du service de surveillance niveau 0 et 1</li>
-                                    <li>Gestion des appels clients entrants, traçabilité et escalade hiérarchique</li>
-                                    <li>Fournir un support de niveau 2</li>
-                                    <li>Administration des systèmes et services Windows</li>
-                                    <li>Rédaction et mise à jour des documents techniques d'exploitation</li>
-                                </ul>
-                                <div class="mt-3">
-                                    <strong>Environnement :</strong> VNC, TSE, SSH, SM9 (HP), Zabbix, Nagios, Centreon, Script Shell, CFT, Gateway XFB, GPO, SQL Server, Crystal Report, Gnu-linux, Windows Server 2008/2012, Apache, Alfresco
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <h6 class="text-info">Infrastructure as Code</h6>
+                                        <div class="skill-tag">Ansible</div>
+                                        <div class="skill-tag">Terraform</div>
+                                        <div class="skill-tag">Vagrant</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="text-info">Conteneurisation</h6>
+                                        <div class="skill-tag">Docker</div>
+                                        <div class="skill-tag">Docker Swarm</div>
+                                        <div class="skill-tag">Kubernetes</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Compétences -->
-                        <div class="fade-in">
-                            <div class="section-title typing-line" data-text="## COMPÉTENCES TECHNIQUES" data-delay="4000"></div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h6 class="text-info">Systèmes d'exploitation</h6>
-                                    <div class="skill-tag">RedHat</div>
-                                    <div class="skill-tag">Unix</div>
-                                    <div class="skill-tag">Windows Server</div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <h6 class="text-info">CI/CD</h6>
+                                        <div class="skill-tag">Jenkins</div>
+                                        <div class="skill-tag">GitLab CI</div>
+                                        <div class="skill-tag">Git</div>
+                                        <div class="skill-tag">SVN</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="text-info">Monitoring</h6>
+                                        <div class="skill-tag">ELK</div>
+                                        <div class="skill-tag">Prometheus</div>
+                                        <div class="skill-tag">Grafana</div>
+                                        <div class="skill-tag">Nagios</div>
+                                        <div class="skill-tag">Zabbix</div>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <h6 class="text-info">Administration services</h6>
-                                    <div class="skill-tag">Apache</div>
-                                    <div class="skill-tag">Nginx</div>
-                                    <div class="skill-tag">Tomcat</div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-6">
-                                    <h6 class="text-info">Infrastructure as Code</h6>
-                                    <div class="skill-tag">Ansible</div>
-                                    <div class="skill-tag">Terraform</div>
-                                    <div class="skill-tag">Vagrant</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <h6 class="text-info">Conteneurisation</h6>
-                                    <div class="skill-tag">Docker</div>
-                                    <div class="skill-tag">Docker Swarm</div>
-                                    <div class="skill-tag">Kubernetes</div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-6">
-                                    <h6 class="text-info">CI/CD</h6>
-                                    <div class="skill-tag">Jenkins</div>
-                                    <div class="skill-tag">GitLab CI</div>
-                                    <div class="skill-tag">Git</div>
-                                    <div class="skill-tag">SVN</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <h6 class="text-info">Monitoring</h6>
-                                    <div class="skill-tag">ELK</div>
-                                    <div class="skill-tag">Prometheus</div>
-                                    <div class="skill-tag">Grafana</div>
-                                    <div class="skill-tag">Nagios</div>
-                                    <div class="skill-tag">Zabbix</div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-6">
-                                    <h6 class="text-info">Bases de données</h6>
-                                    <div class="skill-tag">Oracle</div>
-                                    <div class="skill-tag">MySQL</div>
-                                    <div class="skill-tag">PostgreSQL</div>
-                                    <div class="skill-tag">MongoDB</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <h6 class="text-info">Programmation</h6>
-                                    <div class="skill-tag">Python</div>
-                                    <div class="skill-tag">Shell</div>
-                                    <div class="skill-tag">JavaScript</div>
-                                    <div class="skill-tag">C#.Net</div>
-                                    <div class="skill-tag">SQL</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <!-- Contact Info -->
-                        <div class="fade-in">
-                            <div class="section-title typing-line" data-text="## CONTACT" data-delay="2500"></div>
-                            <div class="contact-info">
-                                <div class="contact-item">
-                                    <i class="fas fa-phone contact-icon"></i>
-                                    +212 776 005 282
-                                </div>
-                                <div class="contact-item">
-                                    <i class="fas fa-envelope contact-icon"></i>
-                                    bisri.karim@gmail.com
-                                </div>
-                                <div class="contact-item">
-                                    <i class="fas fa-map-marker-alt contact-icon"></i>
-                                    Casablanca, Maroc
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <h6 class="text-info">Bases de données</h6>
+                                        <div class="skill-tag">Oracle</div>
+                                        <div class="skill-tag">MySQL</div>
+                                        <div class="skill-tag">PostgreSQL</div>
+                                        <div class="skill-tag">MongoDB</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="text-info">Programmation</h6>
+                                        <div class="skill-tag">Python</div>
+                                        <div class="skill-tag">Shell</div>
+                                        <div class="skill-tag">JavaScript</div>
+                                        <div class="skill-tag">C#.Net</div>
+                                        <div class="skill-tag">SQL</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Formation -->
-                        <div class="fade-in">
-                            <div class="section-title typing-line" data-text="## FORMATIONS" data-delay="5000"></div>
-                            <div class="formation-item">
-                                <div class="job-title">Master en informatique – Option MIAGE</div>
-                                <div class="date">2012 – 2016</div>
-                                <div>École Marocaine des sciences de l'ingénieur – EMSI</div>
-                                <div class="text-muted">Casablanca - Maroc</div>
+                        <div class="col-lg-4">
+                            <!-- Contact Info -->
+                            <div class="fade-in">
+                                <div class="section-title typing-line" data-text="## CONTACT" data-delay="2500"></div>
+                                <div class="contact-info">
+                                    <div class="contact-item">
+                                        <i class="fas fa-phone contact-icon"></i>
+                                        +212 776 005 282
+                                    </div>
+                                    <div class="contact-item">
+                                        <i class="fas fa-envelope contact-icon"></i>
+                                        bisri.karim@gmail.com
+                                    </div>
+                                    <div class="contact-item">
+                                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                                        Casablanca, Maroc
+                                    </div>
+                                </div>
                             </div>
-                            <div class="formation-item">
-                                <div class="job-title">Technicien spécialisé en développement informatique</div>
-                                <div class="date">2010 – 2012</div>
-                                <div>Office de Formation Professionnelle et de la Promotion de Travail (OFPPT)</div>
-                                <div class="text-muted">Casablanca - Maroc</div>
-                            </div>
-                        </div>
 
-                        <!-- Centres d'intérêt -->
-                        <div class="fade-in">
-                            <div class="section-title typing-line" data-text="## CENTRES D'INTÉRÊT" data-delay="6000"></div>
-                            <div class="interests">
-                                <div class="interest-item">
-                                    <i class="fas fa-running"></i>
-                                    Course à pied, marche
+                            <!-- Formation -->
+                            <div class="fade-in">
+                                <div class="section-title typing-line" data-text="## FORMATIONS" data-delay="5000"></div>
+                                <div class="formation-item">
+                                    <div class="job-title">Master en informatique – Option MIAGE</div>
+                                    <div class="date">2012 – 2016</div>
+                                    <div>École Marocaine des sciences de l'ingénieur – EMSI</div>
+                                    <div class="text-muted">Casablanca - Maroc</div>
                                 </div>
-                                <div class="interest-item">
-                                    <i class="fas fa-laptop-code"></i>
-                                    Nouvelles technologies
+                                <div class="formation-item">
+                                    <div class="job-title">Technicien spécialisé en développement informatique</div>
+                                    <div class="date">2010 – 2012</div>
+                                    <div>Office de Formation Professionnelle et de la Promotion de Travail (OFPPT)</div>
+                                    <div class="text-muted">Casablanca - Maroc</div>
                                 </div>
-                                <div class="interest-item">
-                                    <i class="fas fa-microphone"></i>
-                                    Podcasting
+                            </div>
+
+                            <!-- Centres d'intérêt -->
+                            <div class="fade-in">
+                                <div class="section-title typing-line" data-text="## CENTRES D'INTÉRÊT" data-delay="6000"></div>
+                                <div class="interests">
+                                    <div class="interest-item">
+                                        <i class="fas fa-running"></i>
+                                        Course à pied, marche
+                                    </div>
+                                    <div class="interest-item">
+                                        <i class="fas fa-laptop-code"></i>
+                                        Nouvelles technologies
+                                    </div>
+                                    <div class="interest-item">
+                                        <i class="fas fa-microphone"></i>
+                                        Podcasting
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row mt-4">
-                    <div class="col-12 text-center mb-4">
-                        <a href="https://drive.google.com/file/d/1eOtFMOqWnSByvq_XCHSjM0orxen5qok6/view?usp=sharing" target="_blank" class="btn-download">
-                            <i class="fas fa-download"></i> ./download_cv.sh
-                        </a>
+                    <div class="row mt-4">
+                        <div class="col-12 text-center mb-4">
+                            <a href="https://drive.google.com/file/d/1eOtFMOqWnSByvq_XCHSjM0orxen5qok6/view?usp=sharing" target="_blank" class="btn-download">
+                                <i class="fas fa-download"></i> ./download_cv.sh
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <div class="prompt">karim@RBPKBISRI1:~$</div>
-                        <span class="typing-line" data-text="echo 'Merci de votre attention !' && exit" data-delay="7000"></span>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="prompt">karim@RBPKBISRI1:~$</div>
+                            <span class="typing-line" data-text="echo 'Merci de votre attention !' && exit" data-delay="7000"></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -619,28 +639,59 @@
             });
         }
 
-        // Initialisation des animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const typingElements = document.querySelectorAll('.typing-line');
-            
-            typingElements.forEach(element => {
-                const text = element.getAttribute('data-text');
-                const delay = parseInt(element.getAttribute('data-delay')) || 0;
-                typeWriter(element, text, delay);
-            });
+        // Variable pour éviter l'exécution multiple
+        let commandExecuted = false;
 
-            // Animation au scroll
-            window.addEventListener('scroll', animateOnScroll);
-            animateOnScroll(); // Déclencher une fois au chargement
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation de la commande initiale
+            const initialCommand = document.querySelector('.command.typing-line');
+            const text = initialCommand.getAttribute('data-text');
             
-            // Animation d'apparition progressive
+            typeWriter(initialCommand, text, 0);
+            
+            // Afficher le curseur et le texte d'instruction après l'animation
             setTimeout(() => {
-                document.querySelectorAll('.fade-in').forEach((element, index) => {
+                document.getElementById('waitingCursor').style.display = 'inline';
+                document.getElementById('pressEnterText').style.display = 'block';
+            }, text.length * 75 + 1000);
+
+            // Écouter la touche ENTRÉE
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' && !commandExecuted) {
+                    commandExecuted = true;
+                    
+                    // Masquer les éléments d'attente
+                    document.getElementById('waitingCursor').style.display = 'none';
+                    document.getElementById('pressEnterText').style.display = 'none';
+                    
+                    // Afficher le CV avec les animations originales
+                    document.getElementById('cvContent').classList.add('show');
+                    
+                    // Reprendre les animations originales
+                    const typingElements = document.querySelectorAll('.typing-line');
+                    typingElements.forEach(element => {
+                        if (!element.classList.contains('command')) {
+                            const text = element.getAttribute('data-text');
+                            const delay = parseInt(element.getAttribute('data-delay')) || 0;
+                            typeWriter(element, text, delay);
+                        }
+                    });
+
+                    // Animation au scroll
+                    window.addEventListener('scroll', animateOnScroll);
+                    animateOnScroll();
+                    
+                    // Animation d'apparition progressive
                     setTimeout(() => {
-                        element.classList.add('visible');
-                    }, index * 200);
-                });
-            }, 8000);
+                        document.querySelectorAll('.fade-in').forEach((element, index) => {
+                            setTimeout(() => {
+                                element.classList.add('visible');
+                            }, index * 200);
+                        });
+                    }, 8000);
+                }
+            });
         });
 
         // Effet de hover sur les compétences
